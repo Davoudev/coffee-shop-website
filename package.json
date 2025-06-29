@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "aos": "^3.0.0-beta.6",
-    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.2",
     "jsonwebtoken": "^9.0.2",
     "leaflet": "^1.9.4",
     "mongoose": "^8.16.1",

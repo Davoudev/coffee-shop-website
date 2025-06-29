@@ -1,4 +1,4 @@
-const { hash, compare } = require("bcrypt");
+const { hash, compare } = require("bcryptjs");
 const { sign, verify } = require("jsonwebtoken");
 
 const hashPassword = async (password) => {
