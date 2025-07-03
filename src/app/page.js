@@ -4,11 +4,14 @@ import Articles from "@/components/templates/index/articles/Articles";
 import Banner from "@/components/templates/index/banner/Banner";
 import Latest from "@/components/templates/index/latest/Latest";
 import Promote from "@/components/templates/index/promote/Promote";
+// import { authUser } from "@/utils/auth";
 
 export default function Home() {
+  // const user = await authUser();
+
   return (
     <>
-      <Navbar />
+      <Navbar isLogin={true} />
       <Banner />
       <Latest />
       <Promote />
