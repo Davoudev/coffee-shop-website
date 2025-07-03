@@ -49,6 +49,6 @@ const schema = new mongoose.Schema({
   },
 });
 
-const model = mongoose.models.Comment || mongoose.model("Comment", schema);
+const model = mongoose.models.Product || mongoose.model("Product", schema);
 
 export default model;
