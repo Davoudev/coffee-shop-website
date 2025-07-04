@@ -19,6 +19,8 @@ const product = async ({ params }) => {
     _id: productID,
   }).populate("comments");
 
+  const relatedProducts = await ProductModel.find({ smell: product.smell });
+
   return (
     <div className={styles.container}>
       <Navbar isLogin={true} />
@@ -28,7 +30,7 @@ const product = async ({ params }) => {
           <Gallery />
         </div>
         <Tabs product={JSON.parse(JSON.stringify(product))} />
-        <MoreProducts />
+        <MoreProducts relatedProducts={relatedProducts} />
       </div>
       <Footer />
     </div>

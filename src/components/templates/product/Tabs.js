@@ -39,14 +39,13 @@ const Tabs = ({ product }) => {
         </li>
         <li title="Delivery Contents">
           <label htmlFor="moreInfoes" role="button">
-            {" "}
-            اطلاعات بیشتر{" "}
+            اطلاعات بیشتر
           </label>
         </li>
         <li title="Shipping">
           <label htmlFor="comments" role="button">
-            {" "}
-            نظرات (7){" "}
+            نظرات (
+            {product.comments.filter((comment) => comment.isAccept).length})
           </label>
         </li>
       </ul>
@@ -56,10 +55,13 @@ const Tabs = ({ product }) => {
           <Description />
         </section>
         <section className={styles.tabs_content}>
-          <MoreInfoes />
+          <MoreInfoes product={JSON.parse(JSON.stringify(product))} />
         </section>
         <section className={styles.tabs_content}>
-          <Comments comments={JSON.parse(JSON.stringify(product.comments))} />
+          <Comments
+            productID={product._id}
+            comments={JSON.parse(JSON.stringify(product.comments))}
+          />
         </section>
       </div>
     </div>

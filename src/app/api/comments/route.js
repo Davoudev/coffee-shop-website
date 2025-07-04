@@ -1,12 +1,13 @@
 import connectToDB from "@/configs/db";
 import CommentModel from "@/models/Comment";
 import ProductModel from "@/models/Product";
+import { validateEmail } from "@/utils/auth";
 
 export async function POST(req) {
   try {
     connectToDB();
-    const reqBody = req.json();
-    const { username, body, email, score, productID } = body;
+    const reqBody = await req.json();
+    const { username, body, email, score, productID } = reqBody;
 
     // validation
     if (!username || typeof username !== "string" || username.length < 2) {
@@ -16,8 +17,8 @@ export async function POST(req) {
       );
     }
 
-    const validateEmail = validateEmail(email);
-    if (!email || typeof email !== "string" || !validateEmail) {
+    const IsvalidateEmail = validateEmail(email);
+    if (!email || typeof email !== "string" || !IsvalidateEmail) {
       return Response.json({ message: "ایمیل نامعتبر است." }, { status: 400 });
     }
 

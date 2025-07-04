@@ -1,4 +1,4 @@
-import { FaFacebookF, FaStar, FaTwitter } from "react-icons/fa";
+import { FaFacebookF, FaRegStar, FaStar, FaTwitter } from "react-icons/fa";
 import { IoCheckmark } from "react-icons/io5";
 import { CiHeart } from "react-icons/ci";
 import { TbSwitch3 } from "react-icons/tb";
@@ -14,13 +14,17 @@ const Details = ({ product }) => {
 
       <div className={styles.rating}>
         <div>
-          <FaStar />
-          <FaStar />
-          <FaStar />
-          <FaStar />
-          <FaStar />
+          {new Array(product.score).fill(0).map((item, index) => (
+            <FaStar key={index} />
+          ))}
+          {new Array(5 - product.score).fill(0).map((item, index) => (
+            <FaRegStar key={index} />
+          ))}
         </div>
-        <p>(دیدگاه {product.comments.length} کاربر)</p>
+        <p>
+          (دیدگاه
+          {product.comments.filter((comment) => comment.isAccept).length} کاربر)
+        </p>
       </div>
 
       <p className={styles.price}>{product.price.toLocaleString()} تومان</p>
