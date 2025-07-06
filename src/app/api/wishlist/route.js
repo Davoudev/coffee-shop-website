@@ -28,8 +28,11 @@ export async function POST(req) {
     if (!exsitingProduct) {
       return Response.json({ message: "product not found !" }, { status: 404 });
     }
+    const wish = await WishlistModel.findOne({ user, product });
 
-    await WishlistModel.create({ user, product });
+    if (!wish) {
+      await WishlistModel.create({ user, product });
+    }
 
     return Response.json(
       { message: "Product added to Wishlist successfully" },
