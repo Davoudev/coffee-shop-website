@@ -5,11 +5,11 @@ import styles from "@/styles/rules.module.css";
 // import { authUser } from "@/utils/auth";
 
 const page = async () => {
-  //   const user = await authUser();
+  const user = await authUser();
 
   return (
     <>
-      <Navbar isLogin={true} />
+      <Navbar isLogin={user ? true : false} />
       <Breadcrumb route={"قوانین"} />
       <div className={styles.container} data-aos="fade-up">
         <p>

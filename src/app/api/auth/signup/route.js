@@ -1,6 +1,6 @@
 import connectToDB from "@/configs/db";
 import UserModel from "@/models/User";
-import { generateAccessToken, hashPassword } from "@/utils/auth";
+import { generateAccessToken, hashPassword } from "@/utils/auth-client";
 import { roles } from "@/utils/constants";
 
 export async function POST(req) {

@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import styles from "./login.module.css";
 import Link from "next/link";
 import Sms from "./Sms";
-import { validateEmail, validatePassword, validatePhone } from "@/utils/auth";
+import {
+  validateEmail,
+  validatePassword,
+  validatePhone,
+} from "@/utils/auth-client";
 import { showSwal } from "@/utils/helper";
 
 const Login = ({ showRegisterForm }) => {

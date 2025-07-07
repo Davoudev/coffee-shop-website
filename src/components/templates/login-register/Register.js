@@ -2,7 +2,11 @@ import { useState } from "react";
 import styles from "./register.module.css";
 import Sms from "./Sms";
 import { showSwal } from "@/utils/helper";
-import { validateEmail, validatePassword, validatePhone } from "@/utils/auth";
+import {
+  validateEmail,
+  validatePassword,
+  validatePhone,
+} from "@/utils/auth-client";
 
 const Register = ({ showloginForm }) => {
   const [isRegisterWithPass, setIsRegisterWithPass] = useState(false);

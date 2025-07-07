@@ -1,7 +1,7 @@
 import connectToDB from "@/configs/db";
 import CommentModel from "@/models/Comment";
 import ProductModel from "@/models/Product";
-import { validateEmail } from "@/utils/auth";
+import { validateEmail } from "@/utils/auth-client";
 
 export async function POST(req) {
   try {

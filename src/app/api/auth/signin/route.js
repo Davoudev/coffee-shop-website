@@ -6,7 +6,7 @@ import {
   validateEmail,
   validatePassword,
   verifyPassword,
-} from "@/utils/auth";
+} from "@/utils/auth-client";
 
 export async function POST(req) {
   const body = await req.json();
