@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import styles from "./form.module.css";
+import { validateEmail, validatePhone } from "@/utils/auth-client";
+import { showSwal } from "@/utils/helper";
 
 const Form = () => {
   const [email, setEmail] = useState("");
@@ -11,6 +13,45 @@ const Form = () => {
 
   const submitMessage = async (event) => {
     event.preventDefault();
+
+    if (!name.trim() || !email.trim() || !message.trim() || !phone.trim()) {
+      return showSwal("اطلاعات خود را کامل وارد کنید ", "error", "تلاش مجدد");
+    }
+
+    const isValidPhone = validatePhone(phone);
+
+    if (!isValidPhone) {
+      return showSwal("شماره تماس وارد شده معتبر نیست ", "error", "تلاش مجدد");
+    }
+    const isValidEmail = validateEmail(email);
+    if (!isValidEmail) {
+      return showSwal(" ایمیل وارد شده معتبر نیست ", "error", "تلاش مجدد");
+    }
+
+    const contact = {
+      name,
+      email,
+      phone,
+      company,
+      message,
+    };
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(contact),
+    });
+
+    if (res.status === 201) {
+      setEmail("");
+      setName("");
+      setCompany("");
+      setPhone("");
+      setMessage("");
+      showSwal("پیغام شما با موفیت ثبت شد ", "success", "فهمیدم");
+    }
   };
 
   return (
