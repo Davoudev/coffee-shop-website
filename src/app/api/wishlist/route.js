@@ -14,7 +14,7 @@ export async function POST(req) {
 
     if (
       !mongoose.Types.ObjectId.isValid(user) ||
-      !mongoose.Types.ObjectId(product)
+      !mongoose.Types.ObjectId.isValid(product)
     ) {
       return Response.json(
         { message: "Invalid user or product ID format" },
@@ -24,10 +24,10 @@ export async function POST(req) {
 
     //  check for exsiting
 
-    const exsitingProduct = await ProductModel.findById(product);
-    if (!exsitingProduct) {
-      return Response.json({ message: "product not found !" }, { status: 404 });
-    }
+    // const exsitingProduct = await ProductModel.findById(product);
+    // if (!exsitingProduct) {
+    //   return Response.json({ message: "product not found !" }, { status: 404 });
+    // }
     const wish = await WishlistModel.findOne({ user, product });
 
     if (!wish) {

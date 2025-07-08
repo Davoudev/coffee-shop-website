@@ -3,6 +3,7 @@ import Footer from "@/components/modules/footer/Footer";
 import Navbar from "@/components/modules/navbar/Navbar";
 import Form from "@/components/templates/contact-us/Form";
 import Information from "@/components/templates/contact-us/Information";
+import Map from "@/components/templates/contact-us/Map";
 import styles from "@/styles/contact-us.module.css";
 import { authUser } from "@/utils/auth-server";
 import Link from "next/link";
