@@ -4,16 +4,16 @@ require("./Department");
 const schema = new mongoose.Schema({
   title: {
     type: String,
-    require: true,
+    required: true,
   },
   department: {
     type: mongoose.Types.ObjectId,
     ref: "Department",
-    require: true,
+    required: true,
   },
 });
 
 const model =
-  mongoose.models.Department || mongoose.model("Department", schema);
+  mongoose.models.subDepartment || mongoose.model("subDepartment", schema);
 
 export default model;

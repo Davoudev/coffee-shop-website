@@ -3,7 +3,7 @@ const { default: mongoose } = require("mongoose");
 const schema = new mongoose.Schema({
   title: {
     type: String,
-    require: true,
+    required: true,
   },
 });
 

@@ -7,26 +7,26 @@ const schema = new mongoose.Schema(
   {
     department: {
       type: mongoose.Types.ObjectId,
-      require: true,
+      required: true,
       ref: "Department",
     },
     subDepartment: {
       type: mongoose.Types.ObjectId,
-      require: true,
+      required: true,
       ref: "subDepartment",
     },
-    User: {
+    user: {
       type: mongoose.Types.ObjectId,
-      require: true,
+      required: true,
       ref: "User",
     },
     title: {
       type: String,
-      require: true,
+      required: true,
     },
     body: {
       type: String,
-      require: true,
+      required: true,
     },
     priority: {
       type: Number,
