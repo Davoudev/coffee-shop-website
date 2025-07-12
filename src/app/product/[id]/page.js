@@ -9,7 +9,6 @@ import Navbar from "@/components/modules/navbar/Navbar";
 import connectToDB from "@/configs/db";
 import ProductModel from "@/models/Product";
 import { authUser } from "@/utils/auth-server";
-// import { authUser } from "@/utils/auth";
 
 const product = async ({ params }) => {
   const user = await authUser();
