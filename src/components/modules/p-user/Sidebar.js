@@ -9,9 +9,11 @@ import { usePathname } from "next/navigation";
 import { TbListDetails } from "react-icons/tb";
 import Link from "next/link";
 import swal from "sweetalert";
+import { useRouter } from "next/navigation";
 
 const Sidebar = () => {
   const path = usePathname();
+  const router = useRouter();
 
   const logoutHandler = () => {
     swal({
@@ -30,7 +32,7 @@ const Sidebar = () => {
             icon: "success",
             buttons: "فهمیدم",
           }).then((result) => {
-            location.replace("/");
+            router.replace("/");
           });
         }
       }

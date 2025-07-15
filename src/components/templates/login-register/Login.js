@@ -8,11 +8,13 @@ import {
   validatePhone,
 } from "@/utils/auth-client";
 import { showSwal } from "@/utils/helper";
+import { useRouter } from "next/navigation";
 
 const Login = ({ showRegisterForm }) => {
   const [isLoginWithOtp, setIsLoginWithOtp] = useState(false);
   const [password, setPassword] = useState("");
   const [phoneOrEmail, setPhoneOrEmail] = useState("");
+  const router = useRouter();
 
   const hideOtpForm = () => setIsLoginWithOtp(false);
   const logginWithpassword = async () => {
@@ -57,7 +59,13 @@ const Login = ({ showRegisterForm }) => {
     });
 
     if (res.status === 200) {
-      showSwal("شما با موفقیت لاگین شدین!", "success", "ورود به پنل کاربردی");
+      swal({
+        title: "شما با موفقیت لاگین شدین!",
+        icon: "success",
+        buttons: "ورود به پنل کاربردی",
+      }).then(() => {
+        router.replace("/p-user");
+      });
     } else if (res.status === 422 || res.status === 401) {
       showSwal("کاربری با این اطلاعات یافت نشد", "error", "تلاش");
     } else if (res.status == 419) {

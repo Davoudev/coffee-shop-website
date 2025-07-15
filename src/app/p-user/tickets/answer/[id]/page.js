@@ -8,9 +8,13 @@ import TicketModel from "@/models/Ticket";
 const page = async ({ params }) => {
   const ticketID = params.id;
   connectToDB();
-  const ticket = await TicketModel.findOne({ _id: ticketID });
+  const ticket = await TicketModel.findOne({ _id: ticketID })
+    .populate("user", "name")
+    .lean();
 
-  console.log(ticket);
+  const answerTicket = await TicketModel.findOne({
+    mainTicket: ticket._id,
+  });
 
   return (
     <Layout>
@@ -21,12 +25,14 @@ const page = async ({ params }) => {
         </h1>
 
         <div>
-          <Answer type="user" />
-          <Answer type="admin" />
+          <Answer type="user" {...ticket} />
 
-          {/* <div className={styles.empty}>
-            <p>هنوز پاسخی دریافت نکردید</p>
-          </div> */}
+          {answerTicket && <Answer type="admin" />}
+          {!answerTicket && (
+            <div className={styles.empty}>
+              <p>هنوز پاسخی دریافت نکردید</p>
+            </div>
+          )}
         </div>
       </main>
     </Layout>
