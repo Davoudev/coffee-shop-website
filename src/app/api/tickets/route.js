@@ -1,12 +1,15 @@
-import connectToDB from "@/configs/db";
 import { authUser } from "@/utils/auth-server";
 import TicketModel from "@/models/Ticket";
+import connectToDB from "@/configs/db";
 
 export async function POST(req) {
   try {
     connectToDB();
     const reqBody = await req.json();
+    console.log("reqBody =>", reqBody);
     const user = await authUser();
+    console.log("user:", user);
+
     const { department, subDepartment, title, body, priority } = reqBody;
 
     await TicketModel.create({
@@ -20,6 +23,7 @@ export async function POST(req) {
 
     return Response.json({ message: "Ticket saved " }, { status: 201 });
   } catch (err) {
-    return Response.json({ message: err }, { status: 500 });
+    console.error("API Error in /api/tickets:", err); // بهتره همیشه لاگ کنی
+    return Response.json({ message: err.message }, { status: 500 });
   }
 }
