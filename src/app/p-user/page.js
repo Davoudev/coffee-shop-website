@@ -1,12 +1,12 @@
 import Layout from "@/components/layouts/UserPanelLayout";
 import styles from "@/styles/p-user/index.module.css";
-import Box from "@/components/templates/p-user/index/Box";
 import Tickets from "@/components/templates/p-user/index/Tickets";
 import Orders from "@/components/templates/p-user/index/Orders";
 import { authUser } from "@/utils/auth-server";
 import TicketModel from "@/models/Ticket";
 import CommentModel from "@/models/Comment";
 import WishlistModel from "@/models/Wishlist";
+import Box from "@/components/modules/infoBox/InfoBox";
 
 const page = async () => {
   const user = await authUser();
