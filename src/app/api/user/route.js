@@ -30,3 +30,24 @@ export async function POST(req) {
     return Response.json({ message: err }, { status: 500 });
   }
 }
+
+export async function DELETE(req) {
+  try {
+    connectToDB();
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return Response.json({ message: "User ID is required" }, { status: 400 });
+    }
+
+    await UserModel.findOneAndDelete({ _id: id });
+
+    return Response.json(
+      { message: "User Removed successfully :)))" },
+      { status: 200 }
+    );
+  } catch (err) {
+    return Response.json({ message: err }, { status: 500 });
+  }
+}
