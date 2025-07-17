@@ -2,8 +2,20 @@ import React from "react";
 import styles from "./adminPanelLayout.module.css";
 import Sidebar from "@/components/modules/p-admin/Sidebar";
 import Topbar from "@/components/modules/p-admin/Topbor";
+import { authUser } from "@/utils/auth-server";
+import { redirect } from "next/navigation";
 
-const Layout = ({ children }) => {
+const Layout = async ({ children }) => {
+  const user = await authUser();
+
+  if (user) {
+    if (user.role !== "ADMIN") {
+      return redirect("/login-register");
+    }
+  } else {
+    return redirect("/login-register");
+  }
+
   return (
     <div className={styles.layout}>
       <section className={styles.section}>

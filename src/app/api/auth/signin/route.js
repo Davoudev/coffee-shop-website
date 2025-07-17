@@ -29,10 +29,13 @@ export async function POST(req) {
     const user = await UserModel.findOne({ email });
 
     if (!user) {
-      return Response.json({ messgae: "User not found !" });
+      return Response.json({ messgae: "User not found !" }, { status: 422 });
     }
 
-    const isCorrectPasswordWithHash = verifyPassword(password, user.password);
+    const isCorrectPasswordWithHash = await verifyPassword(
+      password,
+      user.password
+    );
 
     if (!isCorrectPasswordWithHash) {
       return Response.json(
@@ -43,8 +46,14 @@ export async function POST(req) {
     const accessToken = generateAccessToken({ email });
     const refreshToken = generateRefreshToken({ email });
 
-    await UserModel.findOneAndUpdate({ email }, { $set: { refreshToken } });
-
+    await UserModel.findOneAndUpdate(
+      { email },
+      {
+        $set: {
+          refreshToken,
+        },
+      }
+    );
     return Response.json(
       { message: "User Logged in successfully :))" },
       {

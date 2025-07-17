@@ -3,13 +3,18 @@ import styles from "@/styles/p-user/index.module.css";
 import Tickets from "@/components/templates/p-user/index/Tickets";
 import Orders from "@/components/templates/p-user/index/Orders";
 import { authUser } from "@/utils/auth-server";
+import { redirect } from "next/navigation";
 import TicketModel from "@/models/Ticket";
 import CommentModel from "@/models/Comment";
 import WishlistModel from "@/models/Wishlist";
 import Box from "@/components/modules/infoBox/InfoBox";
+// import { useRouter } from "next/navigation";
 
 const page = async () => {
   const user = await authUser();
+  if (!user) {
+    redirect("/login-register");
+  }
   const ticket = await TicketModel.find({ user: user._id })
     .limit(3)
     .populate("department", "title")

@@ -9,7 +9,7 @@ const Layout = async ({ children }) => {
   const user = await authUser();
 
   if (!user) {
-    redirect("/login-register");
+    return redirect("/login-register");
   }
 
   return (
