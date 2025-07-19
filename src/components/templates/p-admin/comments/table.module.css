@@ -1,0 +1,201 @@
+/* ===========================
+   Page Title Styles
+=========================== */
+.title {
+  margin-top: 30px;
+  text-align: right;
+  text-transform: uppercase;
+  position: relative;
+  font-size: 30px;
+  z-index: 1;
+  font-weight: 500;
+}
+
+.title:before {
+  /* Removed top border */
+  content: "";
+}
+
+.title:after {
+  border-bottom: 1px solid #711d1c;
+  box-shadow: 0 1px 0 0 #711d1c;
+  content: "";
+  margin: 0 auto;
+  position: absolute;
+  top: 51%;
+  left: 0;
+  right: 0;
+  width: 95%;
+  z-index: -1;
+}
+
+.title span {
+  background: #fff;
+  padding: 0 15px;
+  margin-right: 4rem;
+}
+
+/* ===========================
+   Table Styles
+=========================== */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background-color: #f2f7fd;
+}
+
+.table th {
+  border: none;
+  color: #000;
+  text-align: center;
+}
+
+.table tr {
+  vertical-align: middle;
+}
+
+.table td,
+.table th {
+  padding: 8px 22px;
+  text-align: center;
+}
+
+/* Fixed width for the name column */
+.table th:nth-child(2),
+.table td:nth-child(2) {
+  width: 280px;
+}
+
+/* Table container padding */
+.table_container {
+  padding: 40px 25px;
+}
+
+/* ===========================
+   Button Base Styles
+=========================== */
+.action_btn {
+  width: 100px; /* Same width for all buttons */
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s ease;
+  display: inline-block;
+  margin: 0 2px;
+  color: white;
+}
+
+/* Edit and role change buttons (black) */
+.edit_btn {
+  background-color: #000000;
+}
+
+.edit_btn:hover {
+  background-color: #222222;
+}
+
+/* Save button (green) */
+.save_btn {
+  background-color: #4caf50;
+}
+
+.save_btn:hover {
+  background-color: #3b9442;
+}
+
+/* Delete button (red) */
+.delete_btn {
+  background-color: #f44336;
+}
+
+.delete_btn:hover {
+  background-color: #d32f2f;
+}
+
+/* Ban button (orange) */
+.ban_btn {
+  background-color: #ff9800;
+}
+
+.ban_btn:hover {
+  background-color: #e68900;
+}
+
+/* ===========================
+   Input for Editing User Name
+=========================== */
+.input_edit {
+  width: 100%;
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  direction: rtl;
+}
+
+.input_edit:focus {
+  border-color: #008cff;
+  box-shadow: 0 0 0 2px rgba(0, 140, 255, 0.2);
+}
+
+/* ===========================
+   Additional Status Classes
+=========================== */
+.answer_contact {
+  color: #000;
+  background-color: blue !important;
+}
+
+.no_answer_contact {
+  color: white;
+  background-color: red !important;
+}
+
+.answer_comment {
+  color: #fff;
+  background-color: blue !important;
+}
+
+.no_answer_comment {
+  color: white;
+  background-color: red !important;
+}
+
+.check,
+.no_check {
+  font-size: 13px;
+  background: #000;
+  padding: 0.4rem 0.7rem;
+  width: -webkit-fill-available;
+  cursor: pointer;
+  border: 0;
+  border-radius: 3px;
+  color: white;
+}
+
+.no_check {
+  background: #711d1c;
+}
+
+/* Flex row for alignment if needed */
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Empty message style */
+.empty {
+  color: white;
+  background-color: #711d1c;
+  padding: 0.7rem 2rem;
+  width: max-content;
+  margin: 15rem auto;
+  font-size: 1.7rem;
+  border-radius: 5px;
+}

@@ -8,14 +8,13 @@ import TicketModel from "@/models/Ticket";
 import CommentModel from "@/models/Comment";
 import WishlistModel from "@/models/Wishlist";
 import Box from "@/components/modules/infoBox/InfoBox";
-// import { useRouter } from "next/navigation";
 
 const page = async () => {
   const user = await authUser();
   if (!user) {
     redirect("/login-register");
   }
-  const ticket = await TicketModel.find({ user: user._id })
+  const ticket = await TicketModel.find({ user: user._id, isAnswer: false })
     .limit(3)
     .populate("department", "title")
     .sort({ _id: -1 })
