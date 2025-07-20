@@ -91,31 +91,31 @@ You can deploy this project on platforms like **Vercel**
 
 ### 🏠 Homepage
 
-![Homepage Screenshot](./public/mainPage.png)
+![Homepage Screenshot](./public/images/mainPage.png)
 
 ### Admin Page
 
-![Post Screenshot](./public/AdminPage.png)
+![Post Screenshot](./public/images/AdminPage.png)
 
 ### 🏠 Discounts Handler
 
-![Homepage Screenshot](./public/Discounts.png)
+![Homepage Screenshot](./public/images/Discounts.png)
 
 ### 📝 Login
 
-![Post Screenshot](./public/Login.png)
+![Post Screenshot](./public/images/Login.png)
 
 ### 🏠 Product Detail Page
 
-![Homepage Screenshot](./public/ProductDetail.png)
+![Homepage Screenshot](./public/images/ProductDetail.png)
 
 ### 📝 Ticket Page
 
-![Post Screenshot](./public/TicketPage.png)
+![Post Screenshot](./public/images/TicketPage.png)
 
 ### 📝 User Panel
 
-## ![Post Screenshot](./public/UserPanel.png)
+## ![Post Screenshot](./public/images/UserPanel.png)
 
 ## ⚠️ Disclaimer
 
