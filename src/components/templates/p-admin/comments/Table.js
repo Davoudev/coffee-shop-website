@@ -2,10 +2,53 @@
 import React from "react";
 import styles from "./table.module.css";
 import { showSwal } from "@/utils/helper";
+import swal from "sweetalert";
+import { useRouter } from "next/navigation";
 
 export default function DataTable({ comments, title }) {
+  const router = useRouter();
+
   const showCommentBody = (body) => {
     showSwal(body, undefined, "خوندم");
+  };
+  const acceptCommet = async (commentID) => {
+    const res = await fetch("/api/comments/accept", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: commentID }),
+    });
+
+    if (res.status === 200) {
+      swal({
+        title: "کامنت مورد نظر با موفقیت تایید شد",
+        icon: "success",
+        buttons: "فهمیدم",
+      }).then(() => {
+        router.refresh();
+      });
+    }
+  };
+
+  const rejectCommet = async (commentID) => {
+    const res = await fetch("/api/comments/reject", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: commentID }),
+    });
+
+    if (res.status === 200) {
+      swal({
+        title: "کامنت مورد نظر با موفقیت تایید شد",
+        icon: "success",
+        buttons: "فهمیدم",
+      }).then(() => {
+        router.refresh();
+      });
+    }
   };
 
   return (
@@ -67,9 +110,21 @@ export default function DataTable({ comments, title }) {
                   </button>
                 </td>
                 <td>
-                  <button className={`${styles.action_btn} ${styles.edit_btn}`}>
-                    تایید
-                  </button>
+                  {comment.isAccept ? (
+                    <button
+                      className={`${styles.action_btn} ${styles.edit_btn}`}
+                      onClick={() => rejectCommet(comment._id)}
+                    >
+                      رد
+                    </button>
+                  ) : (
+                    <button
+                      className={`${styles.action_btn} ${styles.edit_btn}`}
+                      onClick={() => acceptCommet(comment._id)}
+                    >
+                      تایید
+                    </button>
+                  )}
                 </td>
                 <td>
                   <button

@@ -3,8 +3,11 @@ import React from "react";
 import styles from "./table.module.css";
 import swal from "sweetalert";
 import { showSwal } from "@/utils/helper";
+import { useRouter } from "next/navigation";
 
 export default function DataTable({ tickets, title }) {
+  const router = useRouter();
+
   const showTicketBody = (body) => {
     showSwal(body, undefined, "خوندم");
   };
@@ -35,6 +38,34 @@ export default function DataTable({ tickets, title }) {
             title: "پاسخ مورد نظر ثبت شد ",
             icon: "success",
             buttons: "فهمیدم",
+          });
+        }
+      }
+    });
+  };
+
+  const banUser = async (email, phone) => {
+    swal({
+      title: "آیا از بن کاربر مطمئن هستید ؟",
+      icon: "warning",
+      buttons: ["نه", "آره"],
+    }).then(async (result) => {
+      if (result) {
+        const res = await fetch("/api/user/ban", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, phone }),
+        });
+
+        if (res.status === 200) {
+          swal({
+            title: "کاربر با موفقیت بن شد",
+            icon: "success",
+            buttons: "متوجه شدم !",
+          }).then(() => {
+            router.refresh();
           });
         }
       }
@@ -87,6 +118,9 @@ export default function DataTable({ tickets, title }) {
                   <button
                     type="button"
                     className={`${styles.action_btn} ${styles.ban_btn}`}
+                    onClick={() =>
+                      banUser(ticket.user.email, ticket.user.phone)
+                    }
                   >
                     بن
                   </button>
