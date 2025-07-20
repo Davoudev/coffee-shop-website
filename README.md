@@ -89,31 +89,33 @@ You can deploy this project on platforms like **Vercel**
 
 ## 📸 Screenshots (Optional)
 
-<!-- ۱. صفحه اصلی (Home Page)
-معرفی برند، محصولات ویژه، بنر اصلی
+### 🏠 Homepage
 
-۲. صفحه فروشگاه / لیست محصولات (Shop Page)
-کارت‌های محصول، دسته‌بندی‌ها
+![Homepage Screenshot](./public/mainPage.png)
 
-۳. صفحه جزئیات محصول (Product Detail Page)
-عکس، قیمت، امتیازدهی، کامنت‌ها
+### Admin Page
 
-۴. صفحه لاگین و ثبت‌نام
-۵. داشبورد کاربر
-لیست سفارشات، تیکت‌ها، علاقه‌مندی‌ها
+![Post Screenshot](./public/AdminPage.png)
 
-۶. پنل مدیریت (Admin Panel)
-مدیریت کاربران، محصولات، کامنت‌ها، تیکت‌ها
+### 🏠 Discounts Handler
 
-۷. سبد خرید و صفحه پرداخت (Cart & Checkout)
-۸. بخش ثبت تیکت و پاسخ آن
-۹. آپلودر فایل یا فرم اضافه کردن محصول
-۱۰. صفحه مدیریت کد تخفیف یا دسترسی کاربران
- -->
+![Homepage Screenshot](./public/Discounts.png)
 
-You can add screenshots of your UI here to showcase your work.
+### 📝 Login
 
----
+![Post Screenshot](./public/Login.png)
+
+### 🏠 Product Detail Page
+
+![Homepage Screenshot](./public/ProductDetail.png)
+
+### 📝 Ticket Page
+
+![Post Screenshot](./public/TicketPage.png)
+
+### 📝 User Panel
+
+## ![Post Screenshot](./public/UserPanel.png)
 
 ## ⚠️ Disclaimer
 

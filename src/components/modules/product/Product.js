@@ -25,7 +25,7 @@ const Card = ({ price, name }) => {
       </div>
 
       <div className={styles.details}>
-        {/* <Link href={"/"}>{name}</Link> */}
+        <Link href={"/"}>{name}</Link>
         <div>
           <FaStar />
           <FaStar />
@@ -33,7 +33,7 @@ const Card = ({ price, name }) => {
           <FaRegStar />
           <FaRegStar />
         </div>
-        {/* <span>{price.toLocaleString()}تومان</span> */}
+        <span>{price.toLocaleString()}تومان</span>
       </div>
     </div>
   );
