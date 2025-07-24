@@ -6,11 +6,14 @@ import { IoMdClose } from "react-icons/io";
 import { useEffect, useState } from "react";
 import stateData from "@/utils/stateData";
 import Select from "react-select";
+import { showSwal } from "@/utils/helper";
 
 const stateOptions = stateData();
 
 const Table = () => {
   const [cart, setCart] = useState([]);
+  const [discount, setDiscount] = useState("");
+  const [totalPrice, setTotalPrice] = useState(0);
   const [stateSelectedOption, setStateSelectedOption] = useState(null);
   const [changeAddress, setChangeAddress] = useState(false);
 
@@ -18,23 +21,45 @@ const Table = () => {
     const localCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(localCart);
   }, []);
+  useEffect(calcTotalPrice, [cart]);
 
-  const calcTotalPrice = () => {
-    let totalPrice = 0;
+  function calcTotalPrice() {
+    let price = 0;
 
     if (cart.length) {
-      totalPrice = cart.reduce(
+      price = cart.reduce(
         (prev, current) => prev + current.price * current.count,
         0
       );
+      setTotalPrice(price);
     }
+    setTotalPrice(price);
+  }
 
-    return totalPrice;
+  const checkDiscount = async () => {
+    // validation
+
+    const res = await fetch("api/discount/use", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ code: discount }),
+    });
+    if (res.status === 404) {
+      return showSwal("کد تخفیف وارد شده معتبر نیست", "error", "تلاش مجدد");
+    } else if (res.status === 422) {
+      return showSwal("کد تخفیف وارد شده  منقضی شده", "error", "تلاش مجدد");
+    } else if (res.status === 200) {
+      const discountCode = await res.json();
+      const newPrice = totalPrice - (totalPrice * discountCode.percent) / 100;
+      setTotalPrice(newPrice);
+      return showSwal("کد تخفیف وارد شده اعمال شد", "success", "فهمیدم");
+    }
   };
 
   return (
     <>
-      {" "}
       <div className={styles.tabel_container}>
         <table className={styles.table}>
           <thead>
@@ -78,8 +103,15 @@ const Table = () => {
         <section>
           <button className={styles.update_btn}> بروزرسانی سبد خرید</button>
           <div>
-            <button className={styles.set_off_btn}>اعمال کوپن</button>
-            <input type="text" placeholder="کد تخفیف" />
+            <button className={styles.set_off_btn} onClick={checkDiscount}>
+              اعمال کوپن
+            </button>
+            <input
+              type="text"
+              placeholder="کد تخفیف"
+              value={discount}
+              onChange={(event) => setDiscount(event.target.value)}
+            />
           </div>
         </section>
       </div>
@@ -124,7 +156,7 @@ const Table = () => {
 
         <div className={totalStyles.total}>
           <p>مجموع</p>
-          <p>{calcTotalPrice().toLocaleString()} تومان</p>
+          <p>{totalPrice.toLocaleString()} تومان</p>
         </div>
         <Link href={"/checkout"}>
           <button className={totalStyles.checkout_btn}>
