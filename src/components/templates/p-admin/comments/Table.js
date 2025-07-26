@@ -78,7 +78,10 @@ export default function DataTable({ comments, title }) {
           </thead>
           <tbody>
             {comments.map((comment, index) => (
-              <tr key={comment._id}>
+              <tr
+                key={comment._id}
+                className={comment.isAccept ? styles.accept : styles.reject}
+              >
                 <td>{index + 1}</td>
                 <td>{comment.username}</td>
                 <td>{comment.email}</td>
