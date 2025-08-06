@@ -7,6 +7,7 @@ import {
   validatePassword,
   validatePhone,
 } from "@/utils/auth-client";
+import { useRouter } from "next/navigation";
 
 const Register = ({ showloginForm }) => {
   const [isRegisterWithPass, setIsRegisterWithPass] = useState(false);
@@ -15,6 +16,7 @@ const Register = ({ showloginForm }) => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const hideOtpForm = () => setIsRegisterWithOtp(false);
   const signup = async () => {
@@ -50,7 +52,13 @@ const Register = ({ showloginForm }) => {
     });
 
     if (res.status === 201) {
-      showSwal("ثبت نام با موفقیت انچام شد", "success", "ورود به پنل کاربری");
+      swal({
+        title: "حساب کاربری با موفقیت ساخته شد ",
+        icon: "success",
+        buttons: "ورود به پنل کاربردی",
+      }).then(() => {
+        router.replace("/p-user");
+      });
     } else if (res.status === 422) {
       showSwal("شما قبلا حساب ساختید", "error", "برگشت");
     }
