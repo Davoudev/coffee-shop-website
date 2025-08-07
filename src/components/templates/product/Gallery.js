@@ -28,8 +28,8 @@ const Gallery = () => {
         className="mySwiper2 gallery-slider"
       >
         {images.map((img, index) => (
-          <SwiperSlide>
-            <img src={img} key={index} />
+          <SwiperSlide key={index}>
+            <img src={img} />
           </SwiperSlide>
         ))}
       </Swiper>

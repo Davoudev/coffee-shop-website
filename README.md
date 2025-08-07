@@ -93,7 +93,7 @@ You can deploy this project on platforms like **Vercel**
 
 ![Homepage Screenshot](./public/images/mainPage.png)
 
-### Admin Page
+### Admin Page(check /p-admin route for visite this page)
 
 ![Post Screenshot](./public/images/AdminPage.png)
 
@@ -121,6 +121,7 @@ You can deploy this project on platforms like **Vercel**
 
 This project was built for educational and portfolio purposes.  
 It is **not affiliated** with or endorsed by **Set Coffee**.
+as defualt i changed all of the rules to admin for visit all pages
 
 ---
 

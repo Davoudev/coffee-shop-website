@@ -35,7 +35,6 @@ export default function DataTable({ comments, title }) {
                 <td>{new Date(comment.date).toLocaleDateString("fa-IR")}</td>
                 <td>{comment.productID.name}</td>
                 <td>
-                  {console.log("comment >", comment)}
                   {new Array(comment.score).fill(0).map((item, index) => (
                     <FaStar key={index} />
                   ))}

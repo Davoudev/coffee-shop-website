@@ -28,7 +28,6 @@ export async function GET(req) {
       { email: payload.email },
       "-password -refreshToken -__v"
     );
-    console.log("user backend => ", user);
     return Response.json(user);
   } catch (error) {
     return Response.json(

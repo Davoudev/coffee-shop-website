@@ -11,7 +11,6 @@ const page = async () => {
   const wishlist = await WishlistModel.find({ user: user._id }).populate(
     "product"
   );
-  console.log(wishlist);
 
   return (
     <UserPanelLayout>

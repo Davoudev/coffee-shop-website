@@ -1,12 +1,19 @@
+"use client";
 import Link from "next/link";
 import styles from "./product.module.css";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { CiSearch, CiHeart } from "react-icons/ci";
+import { useRouter } from "next/navigation";
 
-const Card = ({ price, name, img }) => {
+const Card = ({ price, name, img, _id }) => {
+  const router = useRouter();
+
   return (
     <div className={styles.card}>
-      <div className={styles.details_container}>
+      <div
+        className={styles.details_container}
+        onClick={() => router.push(`/product/${_id}`)}
+      >
         <img
           src={
             img ||

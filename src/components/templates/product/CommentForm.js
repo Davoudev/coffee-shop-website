@@ -39,7 +39,6 @@ const CommentForm = ({ productID }) => {
       },
       body: JSON.stringify(comment),
     });
-    console.log(comment);
     if (res.status === 201) {
       showSwal("کامنت شما با موفقیت ثبت شد", "success", "فهمیدم ");
     }

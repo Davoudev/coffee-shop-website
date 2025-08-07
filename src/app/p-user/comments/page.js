@@ -14,8 +14,6 @@ const page = async () => {
     "-__v"
   ).populate("productID", "name");
 
-  console.log("comments=> ", comments);
-
   return (
     <Layout>
       <main>

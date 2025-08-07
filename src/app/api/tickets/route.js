@@ -6,9 +6,7 @@ export async function POST(req) {
   try {
     connectToDB();
     const reqBody = await req.json();
-    console.log("reqBody =>", reqBody);
     const user = await authUser();
-    console.log("user:", user);
 
     const { department, subDepartment, title, body, priority } = reqBody;
 

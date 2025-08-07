@@ -15,7 +15,6 @@ const Card = ({ price, score, name, productID }) => {
         const res = await fetch(`/api/wishlist/${productID}`, {
           method: "DELETE",
         });
-        console.log(res);
         if (res.status === 201) {
           swal({
             title: "محصول با موفیقت از علاقه مندی ها حذف شد ",

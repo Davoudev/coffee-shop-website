@@ -43,7 +43,6 @@ const Register = ({ showloginForm }) => {
     }
 
     const user = { name, phone, email, password };
-    console.log(user);
     const res = await fetch("/api/auth/signup", {
       method: "POST",
       headers: {

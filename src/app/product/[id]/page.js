@@ -15,7 +15,6 @@ const product = async ({ params }) => {
 
   connectToDB();
   const productID = params.id;
-  console.log(params.id);
   const product = await ProductModel.findByIdAndUpdate({
     _id: productID,
   }).populate("comments");
