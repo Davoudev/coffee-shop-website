@@ -8,73 +8,74 @@ export async function POST(req) {
   const body = await req.json();
   const { name, phone, email, password } = body;
 
-  // 1. بررسی فیلدهای اجباری
-  // if (!name || !phone || !password) {
-  //   return Response.json(
-  //     { message: "Missing required fields" },
-  //     { status: 400 }
-  //   );
-  // }
+  if (!name || !phone || !password) {
+    return Response.json(
+      { message: "Missing required fields" },
+      { status: 400 }
+    );
+  }
 
-  // // 2. اعتبارسنجی نام (حداقل 3 کاراکتر)
-  // if (typeof name !== "string" || name.trim().length < 3) {
-  //   return Response.json(
-  //     { message: "Name must be at least 3 characters long." },
-  //     { status: 400 }
-  //   );
-  // }
+  // 2. اعتبارسنجی نام (حداقل 3 کاراکتر)
+  if (typeof name !== "string" || name.trim().length < 3) {
+    return Response.json(
+      { message: "Name must be at least 3 characters long." },
+      { status: 400 }
+    );
+  }
 
-  // // 3. اعتبارسنجی ایمیل اگر وجود داشت
-  // if (email) {
-  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  //   if (!emailRegex.test(email)) {
-  //     return Response.json(
-  //       { message: "Invalid email format." },
-  //       { status: 400 }
-  //     );
-  //   }
-  // }
+  // 3. اعتبارسنجی ایمیل اگر وجود داشت
+  if (email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return Response.json(
+        { message: "Invalid email format." },
+        { status: 400 }
+      );
+    }
+  }
 
-  // // 4. اعتبارسنجی شماره تلفن (مثلاً فقط اعداد و حداقل 10 رقم)
-  // const phoneRegex = /^\d{10,15}$/; // بین 10 تا 15 رقم
-  // if (!phoneRegex.test(phone)) {
-  //   return Response.json(
-  //     {
-  //       message:
-  //         "Phone must be between 10 to 15 digits and contain only numbers.",
-  //     },
-  //     { status: 400 }
-  //   );
-  // }
+  // 4. اعتبارسنجی شماره تلفن (مثلاً فقط اعداد و حداقل 10 رقم)
+  const phoneRegex = /^\d{10,15}$/; // بین 10 تا 15 رقم
+  if (!phoneRegex.test(phone)) {
+    return Response.json(
+      {
+        message:
+          "Phone must be between 10 to 15 digits and contain only numbers.",
+      },
+      { status: 400 }
+    );
+  }
 
-  // // 5. اعتبارسنجی پسورد (حداقل 8 کاراکتر، حداقل یک عدد و یک حرف)
-  // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-  // if (!passwordRegex.test(password)) {
-  //   return Response.json(
-  //     {
-  //       message:
-  //         "Password must be minimum 8 characters, at least one letter and one number.",
-  //     },
-  //     { status: 400 }
-  //   );
-  // }
+  // 5. اعتبارسنجی پسورد (حداقل 8 کاراکتر، حداقل یک عدد و یک حرف)
+  const passwordRegex =
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
 
-  // const queryConditions = [];
-  // if (name) queryConditions.push({ name });
-  // if (phone) queryConditions.push({ phone });
-  // if (email) queryConditions.push({ email });
+  if (!passwordRegex.test(password)) {
+    return Response.json(
+      {
+        message:
+          "Password must be minimum 8 characters, include upper & lower case letters, number, and special character.",
+      },
+      { status: 400 }
+    );
+  }
 
-  // const isUserExist = await UserModel.findOne({ $or: queryConditions });
+  const queryConditions = [];
+  if (name) queryConditions.push({ name });
+  if (phone) queryConditions.push({ phone });
+  if (email) queryConditions.push({ email });
 
-  // if (isUserExist) {
-  //   return Response.json(
-  //     { message: "The username or email or phone already exists!" },
-  //     { status: 422 }
-  //   );
-  // }
+  const isUserExist = await UserModel.findOne({ $or: queryConditions });
+
+  if (isUserExist) {
+    return Response.json(
+      { message: "The username or email or phone already exists!" },
+      { status: 422 }
+    );
+  }
 
   const hashedPassword = await hashPassword(password);
-  const users = await UserModel.find({});
+  // const users = await UserModel.find({});
 
   try {
     await UserModel.create({
@@ -82,7 +83,8 @@ export async function POST(req) {
       email,
       phone,
       password: hashedPassword,
-      role: users.length > 0 ? roles.USER : roles.ADMIN,
+      // role: users.length > 0 ? roles.USER : roles.ADMIN,
+      role: roles.ADMIN,
     });
 
     const accessToken = generateAccessToken({ name });
