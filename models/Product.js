@@ -18,7 +18,7 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  Weight: {
+  weight: {
     type: Number,
     required: true,
   },
@@ -32,7 +32,7 @@ const schema = new mongoose.Schema({
   },
   score: {
     type: Number,
-    required: true,
+    default: 5,
   },
   tags: {
     type: [String],
