@@ -14,7 +14,7 @@ const page = async ({ params }) => {
 
   const answerTicket = await TicketModel.findOne({
     mainTicket: ticket._id,
-  });
+  }).populate("user", "name");
 
   return (
     <Layout>
@@ -27,7 +27,7 @@ const page = async ({ params }) => {
         <div>
           <Answer type="user" {...ticket} />
 
-          {answerTicket && <Answer type="admin" />}
+          {answerTicket && <Answer {...ticket} type="admin" />}
           {!answerTicket && (
             <div className={styles.empty}>
               <p>هنوز پاسخی دریافت نکردید</p>
