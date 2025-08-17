@@ -7,10 +7,10 @@ const verifyPassword = async (password, hashed) =>
   await compare(password, hashed);
 
 const generateAccessToken = (data) =>
-  sign({ ...data }, process.env.AccessTokenSecretKey, { expiresIn: "60d" });
+  sign({ ...data }, process.env.AccessTokenSecretKey, { expiresIn: "2d" });
 
 const generateRefreshToken = (data) =>
-  sign({ ...data }, process.env.RefreshTokenSecretKey, { expiresIn: "15d" });
+  sign({ ...data }, process.env.RefreshTokenSecretKey, { expiresIn: "20d" });
 
 const validateEmail = (email) =>
   /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/g.test(email);
