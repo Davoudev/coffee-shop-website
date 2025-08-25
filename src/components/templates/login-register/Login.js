@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import styles from "./login.module.css";
 import Link from "next/link";
 import Sms from "./Sms";
-import {
-  validateEmail,
-  validatePassword,
-  validatePhone,
-} from "@/utils/auth-client";
 import { showSwal } from "@/utils/helper";
 import { useRouter } from "next/navigation";
+import { useFormState } from "react-dom";
+import { loginAction } from "@/actions/login";
 
 const Login = ({ showRegisterForm }) => {
   const [isLoginWithOtp, setIsLoginWithOtp] = useState(false);
@@ -16,102 +14,73 @@ const Login = ({ showRegisterForm }) => {
   const [phoneOrEmail, setPhoneOrEmail] = useState("");
   const router = useRouter();
 
-  const hideOtpForm = () => setIsLoginWithOtp(false);
-  const logginWithpassword = async () => {
-    if (!phoneOrEmail) {
-      return showSwal(
-        "لطفا شماره تماس  یا ایمیل را وارد کنید",
-        "error",
-        " چشم"
-      );
-    }
+  const [state, formAction] = useFormState(loginAction, null);
 
-    const isPhone = validatePhone(phoneOrEmail);
-    const isValidEmail = validateEmail(phoneOrEmail);
-    if (!isValidEmail && !isPhone) {
-      return showSwal(
-        "لطفا شماره تماس  یا ایمیل را درست وارد کنید",
-        "error",
-        "تلاش مجدد"
-      );
-    }
+  useEffect(() => {
+    if (!state) return;
 
-    if (!password) {
-      return showSwal("لطفا پسورد رو وارد کنید ", "error", "چشم");
-    }
-
-    const isValidPassword = validatePassword(password);
-    if (!isValidPassword) {
-      return showSwal(
-        "پسورد وارد شده به انداره کافی قوی نیست",
-        "error",
-        "نلاش مجدد"
-      );
-    }
-
-    // send request
-    const user = { email: phoneOrEmail, password };
-
-    const res = await fetch("/api/auth/signin/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    });
-
-    if (res.status === 200) {
-      swal({
-        title: "شما با موفقیت لاگین شدین!",
-        icon: "success",
-        buttons: "ورود به پنل کاربردی",
-      }).then(() => {
-        router.replace("/p-user");
+    if (state.success) {
+      showSwal(
+        "شما با موفقیت لاگین شدین!",
+        "success",
+        "ورود به پنل کاربری"
+      ).then(() => {
+        router.push("/p-user");
       });
-    } else if (res.status === 422 || res.status === 401) {
-      showSwal("کاربری با این اطلاعات یافت نشد", "error", "تلاش");
-    } else if (res.status == 419) {
-      showSwal("ایمیل یا پسورد وارد شده صحیح نیست ", "error", "تلاش مجدد");
+    } else if (state.error) {
+      showSwal(state.error, "error", "تلاش مجدد");
     }
-  };
+  }, [state, router]);
+
+  const hideOtpForm = () => setIsLoginWithOtp(false);
+
   return (
     <>
       {!isLoginWithOtp ? (
         <>
-          <div className={styles.form}>
-            <input
-              className={styles.input}
-              type="text"
-              value={phoneOrEmail}
-              onChange={(event) => setPhoneOrEmail(event.target.value)}
-              placeholder="ایمیل/شماره موبایل"
-            />
-            <input
-              className={styles.input}
-              type="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              placeholder="رمز عبور"
-            />
-            <div className={styles.checkbox}>
-              <input type="checkbox" name="" id="" />
-              <p>مرا به یاد داشته باش</p>
+          <form action={formAction}>
+            <div className={styles.form}>
+              <input
+                className={styles.input}
+                name="identifier"
+                type="text"
+                value={phoneOrEmail}
+                onChange={(event) => setPhoneOrEmail(event.target.value)}
+                placeholder="ایمیل/شماره موبایل"
+              />
+              <input
+                className={styles.input}
+                name="password"
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                placeholder="رمز عبور"
+              />
+              <div className={styles.checkbox}>
+                <input type="checkbox" name="" id="" />
+                <p>مرا به یاد داشته باش</p>
+              </div>
+              <button className={styles.btn}>ورود</button>
+              <Link href={"/forget-password"} className={styles.forgot_pass}>
+                رمز عبور را فراموش کرده اید؟
+              </Link>
+              <button
+                type="button"
+                onClick={() => setIsLoginWithOtp(true)}
+                className={styles.btn}
+              >
+                ورود با کد یکبار مصرف
+              </button>
+              <span>ایا حساب کاربری ندارید؟</span>
+              <button
+                type="button"
+                onClick={showRegisterForm}
+                className={styles.btn_light}
+              >
+                ثبت نام
+              </button>
             </div>
-            <button className={styles.btn} onClick={logginWithpassword}>
-              ورود
-            </button>
-            <Link href={"/forget-password"} className={styles.forgot_pass}>
-              رمز عبور را فراموش کرده اید؟
-            </Link>
-            <button
-              onClick={() => setIsLoginWithOtp(true)}
-              className={styles.btn}
-            >
-              ورود با کد یکبار مصرف
-            </button>
-            <span>ایا حساب کاربری ندارید؟</span>
-            <button onClick={showRegisterForm} className={styles.btn_light}>
-              ثبت نام
-            </button>
-          </div>
+          </form>
           <Link href={"/"} className={styles.redirect_to_home}>
             لغو
           </Link>
