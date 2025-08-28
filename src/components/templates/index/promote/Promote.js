@@ -21,11 +21,6 @@ const Promote = () => {
         <main className={styles.main}>
           <img width={660} height={530} src="/images/Home32.jpg" alt="" />
           <section data-aos="fade-up" className={styles.why_coffee}>
-            <img
-              className={styles.logo}
-              src="/images/coffee-svg-2.svg"
-              alt=""
-            />
             <p className={styles.title}>چرا قهوه ست</p>
             <p>
               برخورداری از تجربه و قدمت کافی و آگاهی از ذایقه مصرف کنندگان

@@ -10,53 +10,60 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 
-const Card = () => {
+const Article = () => {
   return (
     <div className={styles.card}>
-      <Link className={styles.img_container} href={"/article/123"}>
-        <img
-          src="https://set-coffee.com/wp-content/uploads/elementor/thumbs/-%D9%82%D9%87%D9%88%D9%87-%D8%A8%D8%A7-%D8%B4%DB%8C%D8%B1-qi8xuncj4ordgstrl43mbg5jfj1ezzamf6v9rnitn0.jpg"
-          alt=""
-        />
-      </Link>
-      <div className={styles.date}>
-        <span>24</span>
-        <span>بهمن</span>
-      </div>
-      <div className={styles.details}>
-        <span className={styles.tag}>قهوه</span>
-        <Link href={"/article/123"} className={styles.title}>
-          مصرف قهوه با شیر برای کاهش التهاب
-        </Link>
-        <div>
-          <p>نویسنده</p>
+      <div className={styles.img_container}>
+        <Link href={"/article/123"}>
           <img
-            src="https://secure.gravatar.com/avatar/665a1a4dc7cc052eaa938253ef413a78?s=32&d=mm&r=g"
-            alt=""
+            src="https://set-coffee.com/wp-content/uploads/elementor/thumbs/-%D9%82%D9%87%D9%88%D9%87-%D8%A8%D8%A7-%D8%B4%DB%8C%D8%B1-qi8xuncj4ordgstrl43mbg5jfj1ezzamf6v9rnitn0.jpg"
+            alt="مقاله قهوه"
           />
-          <p>Mohebi</p>
-          <div>
-            <MdOutlineSms />
-            <span>0</span>
-          </div>
-          <div className={styles.share}>
-            <IoShareSocialOutline />
-            <div className={styles.tooltip}>
-              <Link href={"/"}>
-                <FaTelegram />
-              </Link>
-              <Link href={"/"}>
-                <FaLinkedinIn />
-              </Link>
-              <Link href={"/"}>
-                <FaPinterest />
-              </Link>
-              <Link href={"/"}>
-                <FaTwitter />
-              </Link>
-              <Link href={"/"}>
-                <FaFacebookF />
-              </Link>
+        </Link>
+
+        {/* لایه مشکی گرادیان */}
+        <div className={styles.overlay}></div>
+
+        {/* متن و آیکون‌ها روی عکس */}
+        <div className={styles.details}>
+          <span className={styles.tag}>قهوه</span>
+          <Link href={"/article/123"} className={styles.title}>
+            مصرف قهوه با شیر برای کاهش التهاب
+          </Link>
+
+          <div className={styles.meta}>
+            <div className={styles.author_container}>
+              <img
+                src="https://secure.gravatar.com/avatar/665a1a4dc7cc052eaa938253ef413a78?s=32&d=mm&r=g"
+                alt="نویسنده"
+              />
+              <p>Mohebi</p>
+            </div>
+
+            <div className={styles.comment}>
+              <MdOutlineSms />
+              <span>0</span>
+            </div>
+
+            <div className={styles.share}>
+              <IoShareSocialOutline className={styles.share_icon} />
+              <div className={styles.tooltip}>
+                <Link href={"/"}>
+                  <FaTelegram />
+                </Link>
+                <Link href={"/"}>
+                  <FaLinkedinIn />
+                </Link>
+                <Link href={"/"}>
+                  <FaPinterest />
+                </Link>
+                <Link href={"/"}>
+                  <FaTwitter />
+                </Link>
+                <Link href={"/"}>
+                  <FaFacebookF />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -65,4 +72,4 @@ const Card = () => {
   );
 };
 
-export default Card;
+export default Article;

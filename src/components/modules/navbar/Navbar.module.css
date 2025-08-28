@@ -1,0 +1,239 @@
+.navbar main,
+.navbar_fixed main {
+  background: rgb(255, 255, 255);
+  transition: background-color 0.2s ease;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  color: black;
+  display: flex;
+  flex-direction: row-reverse;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 70px;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 1192px;
+  z-index: 9999;
+  justify-content: space-between;
+  position: relative;
+}
+
+.navbar_fixed main {
+  height: 60px !important;
+  box-shadow: none !important;
+}
+
+.navbar_fixed {
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  animation: fadeInDownBig 0.4s ease;
+  left: 0;
+  top: 0;
+  background: white;
+  z-index: 999;
+}
+
+@keyframes fadeInDownBig {
+  0% {
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+.navbar {
+  position: absolute;
+  width: 100%;
+  z-index: 300;
+}
+
+.logo {
+  display: none;
+}
+
+.links {
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  top: 70px;
+  right: 0;
+  width: 100%;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  gap: 15px;
+  list-style: none;
+  z-index: 1000;
+}
+
+.links.open {
+  display: flex;
+}
+
+.links li {
+  font-size: 16px;
+  font-weight: 500;
+  font-family: "shabnam", Arial, Helvetica, sans-serif;
+  color: rgb(52, 24, 14);
+  white-space: nowrap;
+}
+
+.hamburger {
+  display: block;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: rgb(52, 24, 14);
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.navbar_icons {
+  display: flex;
+  gap: 20px;
+  font-size: 1.2rem;
+}
+
+.navbar_icons a {
+  position: relative;
+}
+
+.navbar_icons a span {
+  left: -9px;
+  border-radius: 100%;
+  top: -7px;
+  font-size: 0.5rem;
+  padding: 0.2rem 0.4rem;
+  background: rgb(52, 24, 14);
+  color: white;
+  position: absolute;
+}
+
+.dropdown {
+  position: relative;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: "shabnam", Arial, Helvetica, sans-serif;
+  width: 100%;
+}
+
+.dropdown a {
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.dropdown_content {
+  display: none;
+  flex-direction: column;
+  position: static;
+  background-color: #f9f9f9;
+  min-width: auto;
+  box-shadow: none;
+  padding: 10px 0 0 20px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown_content {
+  display: flex !important;
+}
+
+.dropdown_content a {
+  padding: 8px 0;
+  cursor: pointer;
+  color: #848484;
+  transition: all 0.25s ease;
+  font-size: 14px;
+  justify-content: flex-end !important;
+}
+
+.dropdown_content a:hover {
+  color: rgb(52, 24, 14);
+}
+
+.dropdown_icons {
+  font-size: 0.7rem;
+  position: relative;
+  right: 3px;
+  color: rgba(82, 82, 82, 0.45);
+}
+
+@media (min-width: 768px) {
+  .navbar main,
+  .navbar_fixed main {
+    padding-left: 30px;
+    padding-right: 30px;
+    height: 90px;
+  }
+
+  .navbar_fixed main {
+    height: 73px !important;
+  }
+
+  .logo {
+    display: block;
+    font-size: 1.5rem;
+  }
+
+  .navbar:before {
+    content: "";
+    display: block;
+    height: 30px;
+  }
+  .hamburger {
+    display: none;
+  }
+
+  .links {
+    display: flex;
+    flex-direction: row-reverse;
+    position: static;
+    width: auto;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    gap: 25px;
+    align-items: unset;
+  }
+
+  .links li {
+    font-size: 14px;
+  }
+
+  .navbar_icons {
+    gap: 30px;
+    margin-top: 0.3rem;
+    font-size: 1.2rem;
+  }
+
+  .dropdown {
+    width: auto;
+    padding-bottom: 0.5rem;
+    font-size: 13px;
+  }
+
+  .dropdown_content {
+    display: none !important;
+    position: absolute;
+    top: 20px;
+    right: -3px;
+    min-width: 220px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 12px 20px;
+    text-align: right;
+  }
+
+  .dropdown:hover .dropdown_content {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .navbar main,
+  .navbar_fixed main {
+    max-width: 1192px;
+  }
+}

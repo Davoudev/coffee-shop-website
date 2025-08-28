@@ -1,12 +1,14 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import styles from "./Nabvar.module.css";
+import React, { useEffect, useState, useRef } from "react";
+import styles from "./Navbar.module.css";
 import Link from "next/link";
 import { IoIosArrowDown } from "react-icons/io";
-import { FaShoppingCart, FaRegHeart } from "react-icons/fa";
+import { FaShoppingCart, FaRegHeart, FaBars } from "react-icons/fa"; // اضافه کردن آیکون همبرگر
 
 function Navbar({ isLogin }) {
   const [fixTop, setFixTop] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // state برای منوی موبایل
+  const navbarRef = useRef(null); // ref برای navbar
 
   useEffect(() => {
     const fixNavbarToTop = () => {
@@ -23,16 +25,48 @@ function Navbar({ isLogin }) {
     return () => window.removeEventListener("scroll", fixNavbarToTop);
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isMenuOpen &&
+        navbarRef.current &&
+        !navbarRef.current.contains(event.target)
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <nav className={fixTop ? styles.navbar_fixed : styles.navbar}>
+    <nav
+      ref={navbarRef}
+      className={`${fixTop ? styles.navbar_fixed : styles.navbar} ${
+        isMenuOpen ? styles.menu_open : ""
+      }`}
+    >
       <main>
-        <div>
+        <div className={styles.logo}>
           <Link href="/">
             <img src="/images/logo.png" alt="Logo" />
           </Link>
         </div>
 
-        <ul className={styles.links}>
+        {/* دکمه همبرگر برای موبایل */}
+        <button className={styles.hamburger} onClick={toggleMenu}>
+          <FaBars />
+        </button>
+
+        <ul className={`${styles.links} ${isMenuOpen ? styles.open : ""}`}>
           <li>
             <Link href="/">صفحه اصلی</Link>
           </li>
@@ -46,7 +80,7 @@ function Navbar({ isLogin }) {
             <Link href="/contact-us">تماس با ما</Link>
           </li>
           <li>
-            <Link href="/about-us">درباره ما</Link>
+            <Link href="/aboutUs">درباره ما</Link>
           </li>
           <li>
             <Link href="/rules">قوانین</Link>

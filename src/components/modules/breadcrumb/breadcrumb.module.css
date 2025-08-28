@@ -1,36 +1,49 @@
+.breadcrumb {
+  background-image: url(https://set-coffee.com/wp-content/uploads/2022/06/back1.jpg);
+  background-size: cover;
+  background-position: center center;
+  margin-bottom: 40px;
+  padding: 120px 20px 40px 20px; /* موبایل: padding کمتر */
+  text-align: center;
+}
+
 .breadcrumb div {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row-reverse;
   gap: 6px;
-  padding-bottom: 3.8rem;
+  padding-bottom: 2.5rem; /* موبایل */
+  flex-wrap: wrap; /* اگر فضا کم باشد، لینک‌ها خط بعدی */
 }
-.active_step {
-  opacity: 1 !important;
-}
-.breadcrumb {
-  background-image: url(https://set-coffee.com/wp-content/uploads/2022/06/back1.jpg);
-  background-size: cover;
-  background-position: center center;
-  margin-bottom: 40px;
-  padding: 0 60px;
-  padding-top: 182px;
-}
+
 .breadcrumb div p,
 .breadcrumb div a {
   display: inline-block;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin: 5px 0;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 12px; /* موبایل کوچک */
   line-height: 1.2;
+  color: white;
 }
-.breadcrumb svg {
-  font-size: 1.2rem;
-  opacity: 0.7;
-}
+
 .title {
   text-align: center;
-  font-size: 4.4rem;
+  font-size: 2.5rem; /* موبایل */
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  .breadcrumb {
+    padding: 182px 60px 40px 60px;
+  }
+  .breadcrumb div p,
+  .breadcrumb div a {
+    font-size: 14px;
+  }
+  .title {
+    font-size: 4.4rem;
+  }
 }

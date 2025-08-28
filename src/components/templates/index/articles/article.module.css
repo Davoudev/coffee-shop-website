@@ -1,141 +1,158 @@
 .card {
   position: relative;
+  border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  aspect-ratio: 1 / 1;
+  max-width: 290px;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
 }
 
-.date span:nth-child(1) {
-  font-size: 20px;
+.card:hover {
+  transform: translateY(-5px);
 }
 
-.date {
+/* overlay برای هاور */
+.card::after {
+  content: "";
   position: absolute;
-  top: 12px;
-  right: 12px;
-  padding: 0.3rem 0.5rem;
-  background: white;
-  display: grid;
-  border-radius: 4px;
-  color: black;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4); /* سایه مشکی */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 5;
 }
 
-.details div img {
-  width: 20px;
-  border-radius: 20px;
+.card:hover::after {
+  opacity: 1;
 }
 
-.details div div span {
-  position: absolute;
-  font-size: 7px;
-  top: -5px;
-  left: -4px;
-  border-radius: 100%;
-  padding: 0.1rem 0.2rem 0;
-  background-color: rgb(52, 24, 14);
-}
-.details div div {
+.img_container {
   position: relative;
-}
-.details div svg {
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-.details div {
-  font-size: 14px;
-  color: gray;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  gap: 13px;
+  width: 100%;
+  height: 100%;
 }
 
+.img_container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* لایه گرادیان سیاه از پایین به بالا */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%; /* 🔹 سایه بیشتر */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+  z-index: 1;
+}
+
+/* متن روی عکس */
 .details {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
   width: 100%;
   text-align: center;
-  transition: box-shadow 0.6s ease;
-  padding: 25px;
-  position: absolute;
-  background: linear-gradient(
-    to bottom,
-    transparent 5%,
-    rgba(0, 0, 0, 0.35) 50%,
-    rgba(0, 0, 0, 0.8) 100%
-  );
-  bottom: 0px;
+  color: #fff;
+  padding: 0 8px;
+  z-index: 2;
 }
 
 .tag {
-  font-size: 13px;
-  background-color: rgb(52, 24, 14);
-  padding: 0.5rem;
-  border-radius: 3px;
+  display: inline-block;
+  background: #4e342e;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 3px 7px;
+  border-radius: 6px;
+  margin-bottom: 0.4rem;
 }
 
 .title {
-  word-wrap: break-word;
-  margin: 10px 0;
-  line-height: 1.4;
   display: block;
-  font-size: 23px;
+  font-size: 1.1rem; /* 🔹 بزرگ‌تر */
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 0.6rem;
 }
 
-.card:hover .img_container:nth-child(1)::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 1;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  transition: opacity 0.7s ease;
+.title:hover {
+  color: #ffcc80;
 }
 
-.card:hover .img_container:nth-child(1) {
-  transform: scale(1.03);
-}
-
-.card .img_container:nth-child(1) {
-  position: relative;
-  display: block;
-  transition: transform 0.7s ease, opacity 0.7s ease;
-  overflow: hidden;
-}
-.share {
-  position: relative;
-  bottom: 2px;
-}
-.share:hover .tooltip {
-  opacity: 1;
-}
-
-.tooltip svg {
-  font-size: 1rem !important;
-}
-.tooltip {
-  position: absolute !important;
-  top: -35px;
-  background-color: black;
-  padding: 0.3rem 0.3rem 0;
-  border-radius: 4px;
-  z-index: 999;
-  opacity: 0;
-  color: white !important;
+/* آیکون‌ها زیر متن */
+.meta {
   display: flex;
-  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  font-size: 0.85rem;
+  color: #eee;
 }
 
-.tooltip::before {
-  left: 50%;
-  content: "";
-  top: 100%;
-  margin-left: -5px;
-  border-width: 5px 5px 0;
-  border-top-color: #000 !important;
+.author_container {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
 }
-.tooltip::before {
+
+.author_container img {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.author_container p {
+  font-size: 0.8rem;
+  color: #fff;
+}
+
+.comment,
+.share {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  position: relative;
+  color: #fff;
+}
+
+/* tooltip شبکه اجتماعی */
+.tooltip {
   position: absolute;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-color: transparent;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  background: #fff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  display: flex;
+  gap: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.share:hover .tooltip {
+  transform: translateX(-50%) scale(1);
+  opacity: 1;
+}
+
+.tooltip a {
+  color: #555;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.tooltip a:hover {
+  color: #000;
 }

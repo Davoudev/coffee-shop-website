@@ -1,23 +1,71 @@
-.article div div {
-  display: flex;
-  justify-content: right;
-  gap: 14px;
-  color: rgba(255, 255, 255, 0.5);
-  padding-top: 0.5rem;
-}
+/* === پایه (موبایل) === */
 .article {
   font-family: shabnam;
   display: flex;
-  gap: 15px;
-  align-items: center;
-
-  flex-direction: row-reverse;
-  margin: 20px 0px;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 4rem;
+  text-align: right;
 }
+
+.article img {
+  width: 100%;
+  height: auto;
+  max-width: 250px;
+  border-radius: 6px;
+}
+
+.article div div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.6);
+  padding-top: 0.4rem;
+  font-size: 12px;
+}
+
 .title {
   font-family: shabnam-Bold;
+  font-size: 14px;
+  line-height: 1.6;
 }
-.footer h4 {
-  margin-bottom: 15px;
-  font-family: shabnam-Bold;
+
+/* === تبلت (min-width: 768px) === */
+@media (min-width: 768px) {
+  .article {
+    flex-direction: row-reverse;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .article img {
+    width: 90px;
+    height: auto;
+  }
+
+  .title {
+    font-size: 15px;
+  }
+
+  .article div div {
+    font-size: 13px;
+    gap: 14px;
+  }
+}
+
+/* === دسکتاپ (min-width: 1024px) === */
+@media (min-width: 1024px) {
+  .article {
+    margin: 20px 0;
+  }
+
+  .article img {
+    width: 75px;
+    height: 65px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
 }

@@ -1,18 +1,23 @@
+.container {
+  width: 100%;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
 .title {
-  color: #114639;
-  font-size: 36px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #004d40;
+  margin-bottom: 0.5rem;
 }
 
 .description {
-  color: gray;
+  display: block;
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 2rem;
 }
 
-.container {
-  max-width: 1222px;
-  margin: 0 auto;
-  direction: rtl;
-}
-
-.container main {
-  margin: 40px 0 90px;
+.articles_slider {
+  padding-bottom: 2rem;
 }

@@ -1,18 +1,21 @@
-.container section {
-  display: grid;
-  grid-template-columns: auto auto auto;
+/* === پایه (موبایل) === */
+.container {
   color: black;
-  line-height: 2rem;
-  direction: rtl;
-  gap: 110px;
-  padding: 40px 0;
-  color: gray;
+  text-align: right;
+  max-width: 1222px;
+  width: 100%;
+  padding: 0 15px;
+  margin: 0 auto 4rem auto;
 }
 
-.container section div p {
-  font-size: 36px;
-
-  line-height: 2.4rem;
+.container section {
+  display: grid;
+  grid-template-columns: 1fr; /* موبایل → یک ستون */
+  gap: 30px;
+  padding: 20px 0;
+  line-height: 2rem;
+  color: gray;
+  direction: rtl;
 }
 
 .container section div {
@@ -21,40 +24,79 @@
   color: black;
 }
 
+.container section div p {
+  font-size: 20px; /* موبایل فونت کوچیک‌تر */
+  line-height: 1.8rem;
+}
+
 .container span {
-  font-size: 14px;
-}
-
-.container {
-  color: black;
-  text-align: right;
-  max-width: 1222px;
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-bottom: 4rem;
-  margin-left: auto;
-}
-
-.main p {
-  margin-top: 20px;
-  direction: rtl;
+  font-size: 12px;
 }
 
 .main {
   display: grid;
-  grid-template-columns: auto auto;
-  gap: 90px;
-  margin-top: 150px;
-  margin-bottom: 150px;
+  grid-template-columns: 1fr; /* موبایل → یک ستون */
+  gap: 40px;
+  margin: 60px 0;
+}
+
+.main p {
+  margin-top: 15px;
+  direction: rtl;
 }
 
 .main span {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .title {
-  margin: 10px 0 !important;
-  font-size: 35px;
+  margin: 8px 0 !important;
+  font-size: 24px; /* موبایل کوچیک‌تر */
+}
+
+/* === تبلت (min-width: 768px) === */
+@media (min-width: 768px) {
+  .container section {
+    grid-template-columns: repeat(2, 1fr); /* دوتا ستون */
+    gap: 60px;
+    padding: 30px 0;
+  }
+
+  .container section div p {
+    font-size: 28px;
+  }
+
+  .main {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px;
+    margin: 100px 0;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+}
+
+/* === لپ‌تاپ و دسکتاپ (min-width: 1024px) === */
+@media (min-width: 1024px) {
+  .container section {
+    grid-template-columns: repeat(3, 1fr); /* سه ستون */
+    gap: 110px;
+    padding: 40px 0;
+  }
+
+  .container section div p {
+    font-size: 36px;
+    line-height: 2.4rem;
+  }
+
+  .main {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 90px;
+    margin: 150px 0;
+  }
+
+  .title {
+    font-size: 35px;
+  }
 }
