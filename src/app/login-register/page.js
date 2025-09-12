@@ -5,6 +5,7 @@ import { authTypes } from "@/utils/constants";
 
 import Login from "@/components/templates/login-register/Login";
 import Register from "@/components/templates/login-register/Register";
+import Image from "next/image";
 
 const login_register = () => {
   const [authType, setAuthType] = useState(authTypes.LOGIN);
@@ -22,9 +23,11 @@ const login_register = () => {
         )}
       </div>
       <section>
-        <img
+        <Image
           src="https://neurosciencenews.com/files/2023/06/coffee-brain-caffeine-neuroscincces.jpg"
-          alt=""
+          alt="Coffee and brain"
+          layout="fill"
+          objectFit="cover"
         />
       </section>
     </div>

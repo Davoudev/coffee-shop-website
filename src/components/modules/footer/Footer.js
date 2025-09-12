@@ -95,8 +95,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* <Hr className={styles.footerDivider} /> */}
-
         <p className={styles.copyright}>
           2023 <MdOutlineCopyright /> تمام حقوق متعلق است به{" "}
           <strong>قهوه ست</strong> | طراحی و اجرا <strong>نیلامارکتینگ</strong>

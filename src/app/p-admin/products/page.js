@@ -15,11 +15,11 @@ const page = async () => {
       <AddProduct />
       <main>
         {products.length === 0 ? (
-          <p className={styles.empty}>کامنتی وجود ندارد</p>
+          <p className={styles.empty}>محصولی وجود ندارد</p>
         ) : (
           <Table
             products={JSON.parse(JSON.stringify(products))}
-            title="لیست کامنت ها  "
+            title="لیست  محصولات  "
           />
         )}
       </main>
