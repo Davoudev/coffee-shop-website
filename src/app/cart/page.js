@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import Footer from "@/components/modules/footer/Footer";
 import Navbar from "@/components/modules/navbar/Navbar";
 import Stepper from "@/components/modules/stepper/Stepper";
@@ -7,8 +8,14 @@ import styles from "@/styles/cart.module.css";
 import Link from "next/link";
 import { TbShoppingCartX } from "react-icons/tb";
 
-const page = () => {
-  const cartItem = JSON.parse(localStorage.getItem("cart"));
+const Page = () => {
+  const [cartItem, setCartItem] = useState(null);
+
+  useEffect(() => {
+    const item = localStorage.getItem("cart");
+    if (item) setCartItem(JSON.parse(item));
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -18,9 +25,9 @@ const page = () => {
           <Table />
         </main>
       ) : (
-        <div class={styles.cart_empty} data-aos="fade-up">
+        <div className={styles.cart_empty} data-aos="fade-up">
           <TbShoppingCartX />
-          <p>سبد خرید شما در حال حاضر خالی است. </p>
+          <p>سبد خرید شما در حال حاضر خالی است.</p>
           <span>
             قبل از تسویه حساب، باید چند محصول را به سبد خرید خود اضافه کنید.
           </span>
@@ -30,10 +37,9 @@ const page = () => {
           </div>
         </div>
       )}
-
       <Footer />
     </>
   );
 };
 
-export default page;
+export default Page;
