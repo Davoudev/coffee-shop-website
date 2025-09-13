@@ -14,36 +14,51 @@ const Table = () => {
   const [cart, setCart] = useState([]);
   const [discount, setDiscount] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
+
   const [stateSelectedOption, setStateSelectedOption] = useState(null);
+  const [cityOptions, setCityOptions] = useState([]);
+  const [citySelectedOption, setCitySelectedOption] = useState(null);
+
   const [changeAddress, setChangeAddress] = useState(false);
 
   useEffect(() => {
     const localCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(localCart);
   }, []);
+
   useEffect(calcTotalPrice, [cart]);
 
   function calcTotalPrice() {
     let price = 0;
-
     if (cart.length) {
       price = cart.reduce(
         (prev, current) => prev + current.price * current.count,
         0
       );
-      setTotalPrice(price);
     }
     setTotalPrice(price);
   }
 
-  const checkDiscount = async () => {
-    // validation
+  const updateCount = (id, newCount) => {
+    if (newCount < 1) return;
 
+    const updatedCart = cart.map((product) =>
+      product.id === id ? { ...product, count: newCount } : product
+    );
+
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+  const removeFromCart = (id) => {
+    const updatedCart = cart.filter((item) => item.id !== id);
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
+  const checkDiscount = async () => {
     const res = await fetch("api/discount/use", {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ code: discount }),
     });
     if (res.status === 404) {
@@ -58,9 +73,26 @@ const Table = () => {
     }
   };
 
+  // وقتی استان انتخاب شد شهرها آپدیت بشن
+  const handleStateChange = (selectedOption) => {
+    setStateSelectedOption(selectedOption);
+    setCitySelectedOption(null);
+
+    if (selectedOption) {
+      const cities = selectedOption.value.map((city) => ({
+        label: city,
+        value: city,
+      }));
+      setCityOptions(cities);
+    } else {
+      setCityOptions([]);
+    }
+  };
+
   return (
     <>
       <div className={styles.tabel_container}>
+        {/* سبد خرید */}
         <table className={styles.table}>
           <thead>
             <tr>
@@ -73,15 +105,20 @@ const Table = () => {
           </thead>
           <tbody>
             {cart.map((item) => (
-              <tr>
+              <tr key={item.id}>
                 <td>{(item.count * item.price).toLocaleString()} تومان</td>
                 <td className={styles.counter}>
                   <div>
-                    <span>-</span>
+                    <span onClick={() => updateCount(item.id, item.count - 1)}>
+                      -
+                    </span>
                     <p>{item.count}</p>
-                    <span>+</span>
+                    <span onClick={() => updateCount(item.id, item.count + 1)}>
+                      +
+                    </span>
                   </div>
                 </td>
+
                 <td className={styles.price}>
                   {item.price.toLocaleString()} تومان
                 </td>
@@ -94,7 +131,10 @@ const Table = () => {
                 </td>
 
                 <td>
-                  <IoMdClose className={styles.delete_icon} />
+                  <IoMdClose
+                    className={styles.delete_icon}
+                    onClick={() => removeFromCart(item.id)}
+                  />
                 </td>
               </tr>
             ))}
@@ -115,6 +155,7 @@ const Table = () => {
           </div>
         </section>
       </div>
+
       <div className={totalStyles.totals}>
         <p className={totalStyles.totals_title}>جمع کل سبد خرید</p>
 
@@ -124,31 +165,44 @@ const Table = () => {
         </div>
 
         <p className={totalStyles.motor}>
-          {" "}
-          پیک موتوری: <strong> 30,000 </strong>
+          پیک موتوری: <strong>30,000</strong>
         </p>
+
         <div className={totalStyles.address}>
           <p>حمل و نقل </p>
           <span>حمل و نقل به تهران (فقط شهر تهران).</span>
         </div>
+
         <p
           onClick={() => setChangeAddress((prev) => !prev)}
           className={totalStyles.change_address}
         >
           تغییر آدرس
         </p>
+
         {changeAddress && (
           <div className={totalStyles.address_details}>
             <Select
-              defaultValue={stateSelectedOption}
-              onChange={setStateSelectedOption}
-              isClearable={true}
-              placeholder={"استان"}
-              isRtl={true}
-              isSearchable={true}
+              value={stateSelectedOption}
+              onChange={handleStateChange}
+              isClearable
+              placeholder="استان"
+              isRtl
+              isSearchable
               options={stateOptions}
             />
-            <input type="text" placeholder="شهر" />
+
+            <Select
+              value={citySelectedOption}
+              onChange={setCitySelectedOption}
+              isClearable
+              placeholder="شهر"
+              isRtl
+              isSearchable
+              options={cityOptions}
+              isDisabled={!stateSelectedOption}
+            />
+
             <input type="number" placeholder="کد پستی" />
             <button onClick={() => setChangeAddress(false)}>بروزرسانی</button>
           </div>
@@ -158,6 +212,7 @@ const Table = () => {
           <p>مجموع</p>
           <p>{totalPrice.toLocaleString()} تومان</p>
         </div>
+
         <Link href={"/checkout"}>
           <button className={totalStyles.checkout_btn}>
             ادامه جهت تصویه حساب

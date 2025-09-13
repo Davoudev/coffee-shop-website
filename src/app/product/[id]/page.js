@@ -18,7 +18,6 @@ const product = async ({ params }) => {
   const product = await ProductModel.findByIdAndUpdate({
     _id: productID,
   }).populate("comments");
-
   const relatedProducts = await ProductModel.find({ smell: product.smell });
 
   return (
@@ -27,7 +26,7 @@ const product = async ({ params }) => {
       <div data-aos="fade-up" className={styles.contents}>
         <div className={styles.main}>
           <Details product={JSON.parse(JSON.stringify(product))} />
-          <Gallery />
+          <Gallery img={JSON.parse(JSON.stringify(product.img))} />
         </div>
         <Tabs product={JSON.parse(JSON.stringify(product))} />
         <MoreProducts

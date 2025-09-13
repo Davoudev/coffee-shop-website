@@ -16,7 +16,7 @@ function Banner() {
       rewind={true}
       navigation={true}
       loop={true}
-      autoplay={{ delay: 1500 }}
+      autoplay={{ delay: 150000 }}
       modules={[Navigation, Autoplay]}
       className={"mySwiper home-slider"}
     >

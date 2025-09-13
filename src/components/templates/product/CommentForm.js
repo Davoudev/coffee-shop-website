@@ -15,8 +15,10 @@ const CommentForm = ({ productID }) => {
   };
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-    setUsername(userInfo.username);
-    setEmail(userInfo.email);
+    if (userInfo) {
+      setUsername(userInfo.username || "");
+      setEmail(userInfo.email || "");
+    }
   }, []);
 
   const submitComment = async () => {
