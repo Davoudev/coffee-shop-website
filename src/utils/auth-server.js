@@ -12,7 +12,7 @@ const verifyAccessToken = (token) => {
   }
 };
 
-export const authUser = async () => {
+const authUser = async () => {
   connectToDB();
   const token = cookies().get("token")?.value;
 
