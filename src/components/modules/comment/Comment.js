@@ -5,7 +5,13 @@ import Image from "next/image";
 const Comment = ({ username, body, score, date }) => {
   return (
     <section className={styles.comment}>
-      <Image src="/images/shahin.jpg" className={styles.avatar} alt="" />
+      <Image
+        src="/images/shahin.jpg"
+        className={styles.avatar}
+        alt=""
+        width={20}
+        height={20}
+      />
       <div>
         <div className={styles.main_details}>
           <div className={styles.user_info}>

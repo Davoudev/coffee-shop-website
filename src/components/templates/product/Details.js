@@ -12,6 +12,7 @@ import { showSwal } from "@/utils/helper";
 const Details = ({ product }) => {
   const [count, setCount] = useState(1);
   const addToCart = () => {
+    console.log("Product=>", product);
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     if (cart.length) {
@@ -30,6 +31,7 @@ const Details = ({ product }) => {
           id: product._id,
           name: product.name,
           price: product.price,
+          img: product.img,
           count,
         };
 
@@ -43,6 +45,7 @@ const Details = ({ product }) => {
         id: product._id,
         name: product.name,
         price: product.price,
+        img: product.img,
         count,
       };
 
